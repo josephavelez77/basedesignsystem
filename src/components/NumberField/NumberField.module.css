@@ -130,7 +130,6 @@
 
 .stepperBtn:hover:not(:disabled) {
   background-color: var(--container-color-themeable-hover);
-  color: var(--icon-color-static-brand-primary);
 }
 
 .stepperBtn:disabled {
