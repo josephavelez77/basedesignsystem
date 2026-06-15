@@ -57,12 +57,13 @@ const COMPONENTS = [
   {
     exports: ['IconButton'],
     category: 'Primitives',
-    description: 'Square icon-only button. `aria-label` is required — there is no visible text.',
+    description: 'Square icon-only button. `aria-label` is required — there is no visible text. Three variants: `neutral` (default, most icon buttons), `brandPrimary` (highest-priority or selected-state button when multiple icon buttons appear together), `statusError` (destructive actions like delete).',
     files: ['IconButton/IconButton.tsx'],
-    example: `import { faXmark } from '@fortawesome/free-solid-svg-icons'
+    example: `import { faXmark, faTrash, faGear } from '@fortawesome/free-solid-svg-icons'
 
-<IconButton icon={faXmark} aria-label="Close" variant="neutral" />
-<IconButton icon={faTrash} aria-label="Delete item" variant="brandPrimary" iconSize="small" />`,
+<IconButton icon={faXmark} aria-label="Close" />
+<IconButton icon={faGear} aria-label="Settings" variant="brandPrimary" />
+<IconButton icon={faTrash} aria-label="Delete item" variant="statusError" iconSize="small" />`,
   },
   {
     exports: ['SplitButton'],
@@ -508,7 +509,7 @@ const COMPONENTS = [
   {
     exports: ['TabGroup'],
     category: 'Layout',
-    description: 'Horizontal tab bar. Manages its own selected state when `activeIndex` and `onChange` are omitted.',
+    description: 'Horizontal tab bar. Active tab uses brand-primary fill; unselected tabs use neutral text. Manages its own selected state when `activeIndex` and `onChange` are omitted.',
     files: ['TabGroup/TabGroup.tsx'],
     example: `<TabGroup
   tabs={[{ label: 'Overview' }, { label: 'Activity' }, { label: 'Settings' }]}
@@ -533,7 +534,7 @@ const COMPONENTS = [
   {
     exports: ['Breadcrumb'],
     category: 'Layout',
-    description: 'Hierarchical navigation trail. The last item is treated as the current page and rendered without a link.',
+    description: 'Hierarchical navigation trail. The last item is treated as the current page and rendered as muted text (not a link). Back-link items use neutral text color — not brand primary.',
     files: ['Breadcrumb/Breadcrumb.tsx'],
     example: `<Breadcrumb
   items={[
@@ -689,6 +690,22 @@ import { BarChart } from '@mui/x-charts/BarChart'
   selectedRows={selected}
   onRowSelect={setSelected}
 />`,
+  },
+  {
+    exports: ['Templates'],
+    category: 'Templates',
+    description: 'Full-page layout compositions showing how GlobalToolbar, NavDrawer, PageHeader, and content-area components wire together. These are Storybook-only examples — no exported components.',
+    files: [],
+    notes: 'Templates live in `src/components/Templates/Templates.stories.tsx` and are excluded from the npm build. Use them as copy-paste starting points.',
+    example: `// Standard shell layout pattern used by all templates:
+// GlobalToolbar spans the top (72px).
+// NavDrawer sits on the left (240px expanded, 56px collapsed).
+// Main content fills the remaining space.
+
+// BasicPage — PageHeader with primary + secondary actions
+// BreadcrumbPage — PageHeader with breadcrumb trail
+// TabPage — PageHeader + TabGroup for tabbed content areas
+// StepperPage — Stepper pinned at the top of the content area`,
   },
 ]
 

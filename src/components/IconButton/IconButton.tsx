@@ -3,7 +3,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { Icon, type IconSize } from '../Icon/Icon'
 import styles from './IconButton.module.css'
 
-export type IconButtonVariant = 'brandPrimary' | 'brandSecondary' | 'neutral' | 'ghost'
+export type IconButtonVariant = 'brandPrimary' | 'neutral' | 'statusError'
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** The icon to render — accepts an `IconDefinition` from `@fortawesome/fontawesome-svg-core`. */

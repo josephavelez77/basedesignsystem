@@ -138,14 +138,12 @@ export const DatePicker = ({
             <IconButton
               icon={faChevronLeft}
               aria-label="Previous month"
-              variant="brandPrimary"
               iconSize="xs"
               onClick={prevMonth}
             />
             <IconButton
               icon={faChevronRight}
               aria-label="Next month"
-              variant="brandPrimary"
               iconSize="xs"
               onClick={nextMonth}
             />

@@ -86,7 +86,7 @@ export const Stepper = ({
       {/* Controls row */}
       <div className={styles.controls}>
         <div className={styles.leftControls}>
-          <Button variant="brandPrimary" emphasis="tertiary" onClick={onCancel}>
+          <Button variant="neutral" emphasis="tertiary" onClick={onCancel}>
             {cancelLabel}
           </Button>
           {!isFirst && (

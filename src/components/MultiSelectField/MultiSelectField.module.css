@@ -145,7 +145,7 @@
   width: 32px;
   height: 32px;
   flex-shrink: 0;
-  color: var(--icon-color-static-brand-primary);
+  color: var(--icon-color-themeable-primary);
   transition: transform 200ms ease;
 }
 

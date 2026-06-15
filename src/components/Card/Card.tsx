@@ -68,7 +68,7 @@ export const Card = ({
         <div className={styles.actions}>
           {secondaryAction && (
             <Button
-              variant="brandPrimary"
+              variant="neutral"
               emphasis="tertiary"
               onClick={secondaryAction.onClick}
               disabled={secondaryAction.disabled}

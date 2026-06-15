@@ -82,7 +82,6 @@ export const Dialog = ({
           {dismissible && (
             <IconButton
               icon={faXmark}
-              variant="brandPrimary"
               aria-label="Dismiss dialog"
               onClick={onClose}
             />
@@ -98,7 +97,7 @@ export const Dialog = ({
           <div className={styles.actions}>
             {secondaryAction && (
               <Button
-                variant={secondaryAction.variant ?? "brandPrimary"}
+                variant={secondaryAction.variant ?? "neutral"}
                 emphasis="tertiary"
                 leadingIcon={secondaryAction.leadingIcon && <Icon icon={secondaryAction.leadingIcon} />}
                 onClick={secondaryAction.onClick}

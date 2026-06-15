@@ -88,7 +88,6 @@ export const Drawer = ({
           {dismissible && (
             <IconButton
               icon={faXmark}
-              variant="brandPrimary"
               aria-label="Dismiss drawer"
               onClick={onClose}
             />
@@ -103,7 +102,7 @@ export const Drawer = ({
           <div className={styles.actions}>
             {secondaryAction && (
               <Button
-                variant="brandPrimary"
+                variant="neutral"
                 emphasis="tertiary"
                 onClick={secondaryAction.onClick}
                 disabled={secondaryAction.disabled}

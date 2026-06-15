@@ -1,18 +1,18 @@
-# Base Design System
+# Charter Design System
 
-> An open-source React component library for enterprise software tools. Built with CSS custom property design tokens, dark/light theming, TypeScript, and FontAwesome icons.
+> A React component library for enterprise software tools. Built with CSS custom property design tokens, dark/light theming, TypeScript, and FontAwesome icons.
 
 ## Package
 
-- npm: `@josephavelez77/base-design-system`
-- GitHub: `github:josephavelez77/basedesignsystem`
-- Version: 0.2.1
+- npm: `@josephavelez77/charter-design-system`
+- GitHub: `github:josephavelez77/charterdesignsystem`
+- Version: 0.0.4
 
 ## Critical rules — read before writing any code
 
 1. **Always import the styles at your app entry point** — without this, nothing will be styled:
    ```tsx
-   import '@josephavelez77/base-design-system/styles'
+   import '@josephavelez77/charter-design-system/styles'
    ```
 
 2. **Load the Google Fonts yourself** — the package does NOT bundle fonts. Add this to your HTML `<head>` or the fonts will fall back to the browser default serif:
@@ -51,7 +51,7 @@
 
 4. **All imports come from the root barrel**:
    ```tsx
-   import { Button, TextField, Table } from '@josephavelez77/base-design-system'
+   import { Button, TextField, Table } from '@josephavelez77/charter-design-system'
    ```
 
 ---
@@ -59,7 +59,7 @@
 ## Install
 
 ```bash
-npm install @josephavelez77/base-design-system
+npm install @josephavelez77/charter-design-system
 # peer deps
 npm install react react-dom \
   @fortawesome/fontawesome-svg-core \
@@ -73,8 +73,8 @@ npm install react react-dom \
 ```tsx
 // main.tsx or index.tsx — do this ONCE at the root
 // BOTH imports are required — omitting /tokens leaves all var(--...) unresolved
-import '@josephavelez77/base-design-system/tokens'  // CSS custom properties (fonts NOT included — load separately)
-import '@josephavelez77/base-design-system/styles'  // component styles
+import '@josephavelez77/charter-design-system/tokens'  // CSS custom properties (fonts NOT included — load separately)
+import '@josephavelez77/charter-design-system/styles'  // component styles
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
@@ -101,7 +101,7 @@ Default theme is dark. For light mode, add `data-theme="light"` to `<html>`. To 
 This is how a real page should be built using DS components. Use this as a template:
 
 ```tsx
-import '@josephavelez77/base-design-system/styles'
+import '@josephavelez77/charter-design-system/styles'
 import {
   PageHeader,
   Card,
@@ -112,7 +112,7 @@ import {
   StatusChip,
   Alert,
   Spinner,
-} from '@josephavelez77/base-design-system'
+} from '@josephavelez77/charter-design-system'
 import { faPlus, faDownload } from '@fortawesome/free-solid-svg-icons'
 import styles from './MyPage.module.css'
 
@@ -305,6 +305,9 @@ This library does NOT use Tailwind CSS or shadcn/ui. Do not use Tailwind utility
 ### Actions
 
 **Button**
+
+Variant semantics: `brandPrimary` = the single highest-priority action on a surface (Save, Submit, Confirm); `neutral` = secondary/cancel actions; `brandSecondary` = alternative brand accent; `statusError` = destructive actions (Delete, Remove). Secondary actions in dialogs, drawers, cards, and pagination use `neutral` by default.
+
 ```tsx
 <Button
   variant?: 'brandPrimary' | 'brandSecondary' | 'neutral' | 'statusError'  // default: brandPrimary
@@ -324,11 +327,12 @@ This library does NOT use Tailwind CSS or shadcn/ui. Do not use Tailwind utility
 <IconButton
   icon: IconDefinition          // required — FontAwesome icon
   aria-label: string            // required for a11y
-  variant?: 'neutral' | 'brandPrimary' | 'brandSecondary' | 'ghost'
+  variant?: 'neutral' | 'brandPrimary' | 'statusError'  // default: neutral
   iconSize?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
   disabled?: boolean
 />
 ```
+Variant semantics: `neutral` = default for most icon buttons (close, dismiss, settings, overflow); `brandPrimary` = highest-priority button or selected state when multiple icon buttons appear together; `statusError` = destructive actions (delete, remove).
 
 **ButtonGroup**
 ```tsx
@@ -603,6 +607,7 @@ const [on, setOn] = useState(false)
 ```tsx
 <Breadcrumb items: BreadcrumbItem[] />  // { label, href?, onClick? }
 ```
+Back-link items use neutral text color. The last item (current page) is rendered as muted/tertiary text without a link.
 
 **TabGroup**
 ```tsx
@@ -612,6 +617,7 @@ const [on, setOn] = useState(false)
   onChange?: (index: number) => void
 />
 ```
+Active tab uses brand-primary fill. Unselected tabs use neutral text — not brand color.
 
 **Pagination / SimplePagination**
 ```tsx
@@ -806,4 +812,37 @@ const [on, setOn] = useState(false)
     {/* content */}
   </AccordionItem>
 </AccordionGroup>
+```
+
+---
+
+## Page layout templates
+
+Full-page layout examples are in `src/components/Templates/Templates.stories.tsx` (Storybook only — not exported from the package). Use them as copy-paste starting points.
+
+Standard shell pattern shared by all templates:
+```tsx
+// GlobalToolbar spans the top (72 px height)
+// NavDrawer sits on the left (240 px expanded, 56 px collapsed)
+// Main content fills the remaining space
+
+<div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+  <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
+  <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+    <NavDrawer appName="My App" items={navItems} collapsed={collapsed} onCollapsedChange={setCollapsed} />
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', backgroundColor: 'var(--container-color-themeable-primary)' }}>
+      {/* PageHeader, TabGroup, or Stepper go here */}
+      <div style={{ flex: 1, padding: 'var(--container-padding-static-primary)', overflow: 'auto' }}>
+        {/* page content */}
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Four template variants:
+- **BasicPage** — `PageHeader` with primary + secondary actions
+- **BreadcrumbPage** — `PageHeader` with breadcrumb trail below the title
+- **TabPage** — `PageHeader` + `TabGroup` for tabbed content areas
+- **StepperPage** — `Stepper` pinned at the top of the content area (no padding), scrollable content below
 ```

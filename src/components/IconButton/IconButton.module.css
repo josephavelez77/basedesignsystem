@@ -38,20 +38,6 @@
   color: var(--icon-color-themeable-disabled);
 }
 
-/* ── Variant: brandSecondary ──────────────────────────────────────────────── */
-
-.brandSecondary {
-  color: var(--icon-color-static-brand-secondary);
-}
-
-.brandSecondary:hover:not(:disabled) {
-  background-color: var(--container-color-themeable-hover);
-}
-
-.brandSecondary:disabled {
-  color: var(--icon-color-themeable-disabled);
-}
-
 /* ── Variant: neutral ─────────────────────────────────────────────────────── */
 
 .neutral {
@@ -66,17 +52,17 @@
   color: var(--icon-color-themeable-disabled);
 }
 
-/* ── Variant: ghost ───────────────────────────────────────────────────────── */
+/* ── Variant: statusError ─────────────────────────────────────────────────── */
 
-.ghost {
-  color: var(--icon-color-themeable-secondary);
+.statusError {
+  color: var(--icon-color-themeable-state-error);
 }
 
-.ghost:hover:not(:disabled) {
-  background-color: var(--container-color-themeable-hover);
-  color: var(--icon-color-themeable-primary);
+.statusError:hover:not(:disabled) {
+  background-color: var(--container-color-static-hover-status-error);
 }
 
-.ghost:disabled {
+.statusError:disabled {
   color: var(--icon-color-themeable-disabled);
 }
+

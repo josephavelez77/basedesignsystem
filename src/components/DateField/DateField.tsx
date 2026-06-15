@@ -88,7 +88,7 @@ export const DateField = ({
           </span>
         </div>
         <span aria-hidden="true">
-          <Icon icon={faCalendar} color="var(--icon-color-static-brand-primary)" />
+          <Icon icon={faCalendar} color="var(--icon-color-themeable-primary)" />
         </span>
       </button>
 

@@ -74,7 +74,6 @@ export const PasswordField = React.forwardRef<HTMLInputElement, PasswordFieldPro
           ) : (
             <IconButton
               icon={isVisible ? faEyeSlash : faEye}
-              variant="brandPrimary"
               iconSize="small"
               aria-label={isVisible ? 'Hide password' : 'Show password'}
               disabled={disabled}

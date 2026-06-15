@@ -68,7 +68,6 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
         return (
           <IconButton
             icon={faCircleXmark}
-            variant="brandPrimary"
             iconSize="small"
             aria-label="Clear"
             tabIndex={-1}

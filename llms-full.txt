@@ -1,12 +1,12 @@
 # @josephavelez77/charter-design-system — Full Component Reference
 
-> Version: 0.3.5
+> Version: 0.0.4
 > Package: `npm install @josephavelez77/charter-design-system`
 > Repository: https://github.com/josephavelez77/charterdesignsystem
 
 ## Key facts for AI agents
 
-- **Dark mode is the default.** Light mode is opt-in via `data-theme="light"` on `<html>`. To explicitly scope a dark region inside a light page, use `data-theme="dark"`. Components need no theme logic.
+- **Dark mode is the default.** Light mode is opt-in via `data-theme="light"` on `<html>`. Components need no theme logic.
 - **All icons come from Font Awesome.** Import `IconDefinition` objects from `@fortawesome/free-solid-svg-icons`. Never use emoji or plain strings.
 - **Fonts are NOT bundled.** Consuming apps must load DM Sans, DM Serif Display, and JetBrains Mono from Google Fonts. See the README for the `<link>` tag.
 - **CSS Modules, no inline styles.** Do not pass `style` props with hardcoded colors or spacing — use `className` for layout overrides only.
@@ -88,7 +88,7 @@ Standard clickable button. Supports four color variants, three fill emphases, le
 ---
 ## IconButton
 
-Square icon-only button. `aria-label` is required — there is no visible text.
+Square icon-only button. `aria-label` is required — there is no visible text. Three variants: `neutral` (default, most icon buttons), `brandPrimary` (highest-priority or selected-state button when multiple icon buttons appear together), `statusError` (destructive actions like delete).
 
 **Import:** `import { IconButton } from '@josephavelez77/charter-design-system'`
 
@@ -104,10 +104,11 @@ Square icon-only button. `aria-label` is required — there is no visible text.
 ### Usage
 
 ```tsx
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark, faTrash, faGear } from '@fortawesome/free-solid-svg-icons'
 
-<IconButton icon={faXmark} aria-label="Close" variant="neutral" />
-<IconButton icon={faTrash} aria-label="Delete item" variant="brandPrimary" iconSize="small" />
+<IconButton icon={faXmark} aria-label="Close" />
+<IconButton icon={faGear} aria-label="Settings" variant="brandPrimary" />
+<IconButton icon={faTrash} aria-label="Delete item" variant="statusError" iconSize="small" />
 ```
 
 ---
@@ -368,9 +369,8 @@ Application logo mark. Renders the brand SVG at the configured size.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `orientation` | `LogoOrientation` | 'horizontal' | `horizontal` places the mark and wordmark side by side; `vertical` stacks them. |
-| `size` | `LogoSize` | 'large' | `large` is the standard size; `small` is a compact variant for toolbars. |
-| `className` | `string` | — | Additional CSS class applied to the root element for layout overrides. |
+| `variant` | `LogoVariant` | — | Which form to render: icon mark only, horizontal (mark + wordmark side by side), or vertical (stacked). |
+| `className` | `string` | — | Additional CSS class for size or position overrides. |
 
 ### Usage
 
@@ -400,7 +400,9 @@ Inline status banner for error, warning, success, or info messages. Add `dismiss
 ### Usage
 
 ```tsx
-<Alert severity="error" message="File upload failed — check the file format and try again." dismissible onDismiss={handleDismiss} />
+<Alert severity="error" dismissible onDismiss={handleDismiss}>
+  File upload failed — check the file format and try again.
+</Alert>
 ```
 
 ---
@@ -427,9 +429,13 @@ Transient notification that auto-dismisses after `duration` ms. Pass `action` to
 ### Usage
 
 ```tsx
-<Toast urgency="success" message="Record saved successfully." duration={4000} onDismiss={() => removeToast(id)} />
+<Toast urgency="success" duration={4000} onDismiss={() => removeToast(id)}>
+  Record saved successfully.
+</Toast>
 
-<Toast urgency="error" message="Upload failed." action="Retry" onAction={retryUpload} onDismiss={() => removeToast(id)} />
+<Toast urgency="error" action="Retry" onAction={retryUpload} onDismiss={() => removeToast(id)}>
+  Upload failed.
+</Toast>
 ```
 
 ---
@@ -535,7 +541,7 @@ Modal dialog with title, optional subtitle, body area, and up to two footer acti
 | `label` | `string` | "Dismiss dialog" | Visible text for this action button. |
 | `onClick` | `React.MouseEventHandler<HTMLButtonElement>` | — | Called when the user clicks this action button. |
 | `disabled` | `boolean` | — | When true, the action button is non-interactive. |
-| `variant` | `ButtonVariant` | "brandPrimary" | Color scheme for this action button — defaults to `brandPrimary`. |
+| `variant` | `ButtonVariant` | — | Color scheme for this action button — defaults to `brandPrimary`. |
 | `leadingIcon` | `IconDefinition` | — | Optional leading icon — accepts an `IconDefinition` from `@fortawesome/fontawesome-svg-core`. |
 | `open` | `boolean` | — | When true, the dialog is visible; when false, it is removed from the DOM. |
 | `onClose` | `() => void` | — | Called when the user clicks the scrim or the dismiss ✕ button. |
@@ -1256,7 +1262,7 @@ Collapsible section with a labeled header. Use standalone for a single panel; wr
 ---
 ## TabGroup
 
-Horizontal tab bar. Manages its own selected state when `activeIndex` and `onChange` are omitted.
+Horizontal tab bar. Active tab uses brand-primary fill; unselected tabs use neutral text. Manages its own selected state when `activeIndex` and `onChange` are omitted.
 
 **Import:** `import { TabGroup } from '@josephavelez77/charter-design-system'`
 
@@ -1321,7 +1327,7 @@ Multi-step form progress indicator with step badges, connecting dividers, and Ba
 ---
 ## Breadcrumb
 
-Hierarchical navigation trail. The last item is treated as the current page and rendered without a link.
+Hierarchical navigation trail. The last item is treated as the current page and rendered as muted text (not a link). Back-link items use neutral text color — not brand primary.
 
 **Import:** `import { Breadcrumb } from '@josephavelez77/charter-design-system'`
 
@@ -1414,6 +1420,7 @@ Top application bar with logo, navigation area, and a user avatar. Renders app-l
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
+| `onMenuToggle` | `() => void` | — | Called when the user clicks the menu toggle button — wire to NavDrawer's `collapsed` state. |
 | `avatarSrc` | `string` | — | URL of the current user's avatar photo; when omitted, falls back to initials. |
 | `avatarInitials` | `string` | 'AB' | 1–2 character initials displayed in the avatar when no `avatarSrc` is provided. Defaults to `"AB"`. |
 | `className` | `string` | — | Additional CSS class applied to the root element for layout overrides. |
@@ -1450,8 +1457,9 @@ Collapsible vertical sidebar for application navigation. Typically placed on the
 | `children` | `NavChildItem[]` | — | Nested child items — render an expandable section (expanded drawer) or a flyout menu (collapsed drawer). |
 | `appName` | `string` | — | Application name displayed in the drawer header when expanded. |
 | `items` | `NavItemConfig[]` | — | Navigation item definitions rendered in the drawer's primary nav list. |
-| `defaultCollapsed` | `boolean` | false | Initial collapsed state for uncontrolled usage. When collapsed, labels are hidden and items show tooltips. |
-| `onCollapsedChange` | `(collapsed: boolean) => void` | — | Called with the new collapsed state whenever the user toggles the drawer open/closed. |
+| `collapsed` | `boolean` | — | Controlled collapsed state. When provided, the drawer is fully controlled — pair with `onCollapsedChange`. |
+| `defaultCollapsed` | `boolean` | false | Initial collapsed state for uncontrolled usage. Ignored when `collapsed` is provided. |
+| `onCollapsedChange` | `(collapsed: boolean) => void` | — | Called with the new collapsed state whenever the collapse state changes. |
 | `className` | `string` | — | Additional CSS class applied to the root `<nav>` element for layout overrides. |
 
 ### Usage
@@ -1765,6 +1773,31 @@ Feature-rich data table with sortable columns, row selection, and pagination sup
   selectedRows={selected}
   onRowSelect={setSelected}
 />
+```
+
+---
+# Templates
+
+## Templates
+
+Full-page layout compositions showing how GlobalToolbar, NavDrawer, PageHeader, and content-area components wire together. These are Storybook-only examples — no exported components.
+
+> **Note:** Templates live in `src/components/Templates/Templates.stories.tsx` and are excluded from the npm build. Use them as copy-paste starting points.
+
+**Import:** `import { Templates } from '@josephavelez77/charter-design-system'`
+
+### Usage
+
+```tsx
+// Standard shell layout pattern used by all templates:
+// GlobalToolbar spans the top (72px).
+// NavDrawer sits on the left (240px expanded, 56px collapsed).
+// Main content fills the remaining space.
+
+// BasicPage — PageHeader with primary + secondary actions
+// BreadcrumbPage — PageHeader with breadcrumb trail
+// TabPage — PageHeader + TabGroup for tabbed content areas
+// StepperPage — Stepper pinned at the top of the content area
 ```
 
 ---

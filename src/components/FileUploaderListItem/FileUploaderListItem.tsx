@@ -66,7 +66,7 @@ export const FileUploaderListItem = ({
       {status === 'uploaded' && (
         <IconButton
           icon={faTrash}
-          variant="brandPrimary"
+          variant="statusError"
           iconSize="small"
           aria-label={`Remove ${fileName}`}
           onClick={onDelete}

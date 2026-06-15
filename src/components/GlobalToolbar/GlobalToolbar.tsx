@@ -27,7 +27,7 @@ export const GlobalToolbar = ({
       <div className={styles.left}>
         <IconButton
           icon={faBars}
-          variant="brandPrimary"
+          variant="neutral"
           aria-label="Toggle navigation"
           onClick={onMenuToggle}
         />
@@ -43,17 +43,17 @@ export const GlobalToolbar = ({
       <div className={styles.actions}>
         <IconButton
           icon={faMessage}
-          variant="brandPrimary"
+          variant="neutral"
           aria-label="Messages"
         />
         <IconButton
           icon={faBell}
-          variant="brandPrimary"
+          variant="neutral"
           aria-label="Notifications"
         />
         <IconButton
           icon={faGear}
-          variant="brandPrimary"
+          variant="neutral"
           aria-label="Settings"
         />
         <button type="button" className={styles.avatarButton} aria-label="Account menu">

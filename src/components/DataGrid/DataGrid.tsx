@@ -190,7 +190,6 @@ function OverflowCell<T>({
     <div ref={containerRef} className={styles.overflowContainer}>
       <IconButton
         icon={faEllipsis}
-        variant="brandPrimary"
         aria-label="Row actions"
         onClick={() => (isOpen ? onClose() : onOpen(rowId))}
       />
@@ -540,7 +539,7 @@ export function DataGrid<T extends Record<string, unknown>>({
           )}
           {onFilterClick && (
             <div className={styles.filterWrapper}>
-              <IconButton icon={faFilter} variant="brandPrimary" aria-label="Filter" onClick={onFilterClick} />
+              <IconButton icon={faFilter} aria-label="Filter" onClick={onFilterClick} />
             </div>
           )}
         </div>

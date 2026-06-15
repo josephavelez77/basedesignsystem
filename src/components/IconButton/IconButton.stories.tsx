@@ -5,6 +5,7 @@ import {
   faGear,
   faMagnifyingGlass,
   faPlus,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 import { IconButton } from './IconButton'
 
@@ -15,13 +16,13 @@ const meta: Meta<typeof IconButton> = {
   tags: ['autodocs'],
   args: {
     icon: faEllipsisVertical,
-    variant: 'brandPrimary',
+    variant: 'neutral',
     'aria-label': 'More options',
   },
   argTypes: {
     variant: {
       control: 'select',
-      options: ['brandPrimary', 'brandSecondary', 'neutral'],
+      options: ['brandPrimary', 'neutral', 'statusError'],
     },
     iconSize: {
       control: 'select',
@@ -38,25 +39,25 @@ export const BrandPrimary: Story = {
   args: { variant: 'brandPrimary', icon: faGear, 'aria-label': 'Settings' },
 }
 
-export const BrandSecondary: Story = {
-  args: { variant: 'brandSecondary', icon: faGear, 'aria-label': 'Settings' },
-}
-
 export const Neutral: Story = {
   args: { variant: 'neutral', icon: faXmark, 'aria-label': 'Close' },
 }
 
+export const StatusError: Story = {
+  args: { variant: 'statusError', icon: faTrash, 'aria-label': 'Delete' },
+}
+
 export const Disabled: Story = {
-  args: { variant: 'brandPrimary', icon: faGear, 'aria-label': 'Settings', disabled: true },
+  args: { variant: 'neutral', icon: faGear, 'aria-label': 'Settings', disabled: true },
 }
 
 export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
       <IconButton icon={faMagnifyingGlass} variant="brandPrimary" aria-label="Search" />
-      <IconButton icon={faMagnifyingGlass} variant="brandSecondary" aria-label="Search" />
       <IconButton icon={faMagnifyingGlass} variant="neutral" aria-label="Search" />
-      <IconButton icon={faPlus} variant="brandPrimary" aria-label="Add" disabled />
+      <IconButton icon={faTrash} variant="statusError" aria-label="Delete" />
+      <IconButton icon={faPlus} variant="neutral" aria-label="Add" disabled />
     </div>
   ),
 }

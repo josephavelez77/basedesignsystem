@@ -98,7 +98,7 @@ export const TimeField = ({
           </span>
         </div>
         <span aria-hidden="true">
-          <Icon icon={faClock} color="var(--icon-color-static-brand-primary)" />
+          <Icon icon={faClock} color="var(--icon-color-themeable-primary)" />
         </span>
       </button>
 
