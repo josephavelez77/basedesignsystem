@@ -69,16 +69,16 @@ export const WithToolbar: Story = {
   render: (args) => {
     const [collapsed, setCollapsed] = useState(false)
     return (
-      <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <GlobalToolbar
-          onMenuToggle={() => setCollapsed((v) => !v)}
-          avatarInitials="JV"
+      <div style={{ height: '100vh', display: 'flex', overflow: 'hidden' }}>
+        <NavDrawer
+          {...args}
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
         />
-        <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-          <NavDrawer
-            {...args}
-            collapsed={collapsed}
-            onCollapsedChange={setCollapsed}
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
+          <GlobalToolbar
+            onMenuToggle={() => setCollapsed((v) => !v)}
+            avatarInitials="JV"
           />
           <main style={{ flex: 1, padding: '24px', overflow: 'auto' }}>
             <p style={{ color: 'var(--text-color-themeable-secondary)', fontFamily: 'var(--text-family-static-body)' }}>

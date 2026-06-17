@@ -697,12 +697,39 @@ import { BarChart } from '@mui/x-charts/BarChart'
     description: 'Full-page layout compositions showing how GlobalToolbar, NavDrawer, PageHeader, and content-area components wire together. These are Storybook-only examples — no exported components.',
     files: [],
     notes: 'Templates live in `src/components/Templates/Templates.stories.tsx` and are excluded from the npm build. Use them as copy-paste starting points.',
-    example: `// Standard shell layout pattern used by all templates:
-// GlobalToolbar spans the top (72px).
-// NavDrawer sits on the left (240px expanded, 56px collapsed).
-// Main content fills the remaining space.
+    example: `// Standard page shell — copy this for every new page.
+// NavDrawer is a full-height left column.
+// GlobalToolbar + content stack vertically in the right column.
+// Main content takes 100% of the remaining width and is scrollable.
 
-// BasicPage — PageHeader with primary + secondary actions
+const [collapsed, setCollapsed] = useState(false)
+
+<div style={{ height: '100vh', display: 'flex', overflow: 'hidden' }}>
+  <NavDrawer
+    appName="MyApp"
+    items={navItems}
+    collapsed={collapsed}
+    onCollapsedChange={setCollapsed}
+  />
+  <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
+    <GlobalToolbar
+      onMenuToggle={() => setCollapsed(c => !c)}
+      avatarInitials="JV"
+    />
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <PageHeader
+        title="Page Title"
+        actions={<Button variant="brandPrimary">New Item</Button>}
+      />
+      <main style={{ flex: 1, padding: 'var(--container-padding-static-primary)', overflow: 'auto', width: '100%' }}>
+        {/* page content here — fills available width */}
+      </main>
+    </div>
+  </div>
+</div>
+
+// Variants available as Storybook Templates:
+// BasicPage — PageHeader with primary + secondary actions (start here)
 // BreadcrumbPage — PageHeader with breadcrumb trail
 // TabPage — PageHeader + TabGroup for tabbed content areas
 // StepperPage — Stepper pinned at the top of the content area`,
@@ -852,6 +879,23 @@ function buildHeader(version) {
 - **Fonts are NOT bundled.** Consuming apps must load DM Sans, DM Serif Display, and JetBrains Mono from Google Fonts. See the README for the \`<link>\` tag.
 - **CSS Modules, no inline styles.** Do not pass \`style\` props with hardcoded colors or spacing — use \`className\` for layout overrides only.
 - **All imports are from the top-level package** — never from sub-paths like \`/dist/components/Button\`.
+- **Standard page layout: NavDrawer + GlobalToolbar + PageHeader.** 99.9% of pages should use this shell — NavDrawer as a full-height left column, GlobalToolbar at the top of the right column, PageHeader below it, then scrollable content that takes up 100% of the available width. See the BasicPage template for the canonical implementation.
+
+\`\`\`tsx
+// Standard page shell — use this for virtually every page
+<div style={{ height: '100vh', display: 'flex', overflow: 'hidden' }}>
+  <NavDrawer appName="MyApp" items={navItems} collapsed={collapsed} onCollapsedChange={setCollapsed} />
+  <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
+    <GlobalToolbar onMenuToggle={() => setCollapsed(c => !c)} avatarInitials="JV" />
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <PageHeader title="Page Title" />
+      <main style={{ flex: 1, padding: 'var(--container-padding-static-primary)', overflow: 'auto', width: '100%' }}>
+        {/* page content — use full width, let it be responsive */}
+      </main>
+    </div>
+  </div>
+</div>
+\`\`\`
 
 \`\`\`tsx
 import {
