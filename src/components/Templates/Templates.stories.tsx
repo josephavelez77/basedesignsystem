@@ -30,13 +30,14 @@ const STEPPER_STEPS = [
 
 const shell: React.CSSProperties = {
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'row',
   height: '100vh',
   overflow: 'hidden',
 }
 
-const body: React.CSSProperties = {
+const rightPane: React.CSSProperties = {
   display: 'flex',
+  flexDirection: 'column',
   flex: 1,
   overflow: 'hidden',
 }
@@ -68,14 +69,14 @@ export const BasicPage: Story = {
     const [collapsed, setCollapsed] = useState(false)
     return (
       <div style={shell}>
-        <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
-        <div style={body}>
-          <NavDrawer
-            appName="Charter"
-            items={NAV_ITEMS}
-            collapsed={collapsed}
-            onCollapsedChange={setCollapsed}
-          />
+        <NavDrawer
+          appName="Charter"
+          items={NAV_ITEMS}
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
+        />
+        <div style={rightPane}>
+          <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
           <div style={main}>
             <PageHeader
               title="Page title"
@@ -95,14 +96,14 @@ export const BreadcrumbPage: Story = {
     const [collapsed, setCollapsed] = useState(false)
     return (
       <div style={shell}>
-        <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
-        <div style={body}>
-          <NavDrawer
-            appName="Charter"
-            items={NAV_ITEMS}
-            collapsed={collapsed}
-            onCollapsedChange={setCollapsed}
-          />
+        <NavDrawer
+          appName="Charter"
+          items={NAV_ITEMS}
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
+        />
+        <div style={rightPane}>
+          <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
           <div style={main}>
             <PageHeader
               title="Page title"
@@ -128,14 +129,14 @@ export const TabPage: Story = {
     const [activeTab, setActiveTab] = useState(0)
     return (
       <div style={shell}>
-        <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
-        <div style={body}>
-          <NavDrawer
-            appName="Charter"
-            items={NAV_ITEMS}
-            collapsed={collapsed}
-            onCollapsedChange={setCollapsed}
-          />
+        <NavDrawer
+          appName="Charter"
+          items={NAV_ITEMS}
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
+        />
+        <div style={rightPane}>
+          <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
           <div style={main}>
             <PageHeader title="Page title" />
             <TabGroup
@@ -163,14 +164,14 @@ export const StepperPage: Story = {
     const [activeStep, setActiveStep] = useState(0)
     return (
       <div style={shell}>
-        <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
-        <div style={body}>
-          <NavDrawer
-            appName="Charter"
-            items={NAV_ITEMS}
-            collapsed={collapsed}
-            onCollapsedChange={setCollapsed}
-          />
+        <NavDrawer
+          appName="Charter"
+          items={NAV_ITEMS}
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
+        />
+        <div style={rightPane}>
+          <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
           <div style={main}>
             <Stepper
               steps={STEPPER_STEPS}
