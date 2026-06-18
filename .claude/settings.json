@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "changed=$(git diff --name-only HEAD 2>/dev/null | grep -E '^src/(components|tokens|scripts)/'); if [ -n \"$changed\" ]; then claude -p \"You are maintaining documentation for the Charter Design System. Run 'git diff HEAD' to see what changed. Then read CLAUDE.md, llms.txt, and llms-full.txt and update any that are out of date — new or changed component APIs, token names, conventions, or scripts. Only edit what actually needs changing. If the docs already reflect the changes, do nothing and exit.\" --allowedTools Bash,Read,Edit 2>/dev/null; fi",
+            "command": "changed=$({ git diff --name-only HEAD; git diff --name-only origin/main..HEAD; } 2>/dev/null | sort -u | grep -E '^src/(components|tokens|scripts)/'); if [ -n \"$changed\" ]; then claude -p \"You are maintaining documentation for the Charter Design System. Run 'git diff HEAD' and 'git diff origin/main..HEAD' to see what changed locally and in unpushed commits. Then read CLAUDE.md, llms.txt, and llms-full.txt and update any that are out of date — new or changed component APIs, token names, conventions, or scripts. Only edit what actually needs changing. If the docs already reflect the changes, do nothing and exit.\" --allowedTools Bash,Read,Edit 2>/dev/null; fi",
             "async": true,
             "timeout": 120,
             "statusMessage": "Reviewing docs for updates..."
