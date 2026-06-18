@@ -42,6 +42,8 @@ export interface DialogProps {
   secondaryAction?: DialogAction;
   /** Width preset: `xs` ≈ 320 px up to `xl` ≈ full-width. Defaults to `sm`. */
   size?: DialogSize;
+  /** When true, the dialog stretches to fill its `size` max-width instead of shrinking to content. Use for forms and structured content. */
+  fullWidth?: boolean;
   /** Additional CSS class applied to the dialog panel for layout overrides. */
   className?: string;
 }
@@ -57,6 +59,7 @@ export const Dialog = ({
   primaryAction,
   secondaryAction,
   size = 'sm',
+  fullWidth = false,
   className,
 }: DialogProps) => {
   const titleId = useId();
@@ -69,7 +72,7 @@ export const Dialog = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className={[styles.dialog, styles[size], className].filter(Boolean).join(" ")}
+        className={[styles.dialog, styles[size], fullWidth && styles.fullWidth, className].filter(Boolean).join(" ")}
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.header}>

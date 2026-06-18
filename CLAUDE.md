@@ -65,7 +65,7 @@ scripts/
 
 | Token | Value |
 |---|---|
-| `--container-color-themeable-primary` | Main surface background |
+| `--container-color-themeable-primary` | **Page/app background — must be set on every page wrapper, `<main>`, `html`, and `body`. Never leave it as browser default (white).** |
 | `--container-color-themeable-secondary` | Recessed/card background |
 | `--text-color-themeable-primary` | Primary text |
 | `--text-color-themeable-secondary` | Secondary/muted text |

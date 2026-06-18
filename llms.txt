@@ -429,6 +429,7 @@ Variant semantics: `neutral` = default for most icon buttons (close, dismiss, se
   primaryAction?: DialogAction  // { label, onClick, disabled?, variant?, leadingIcon? }
   secondaryAction?: DialogAction
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  fullWidth?: boolean              // default: false — stretch to fill size max-width
 >
   {/* optional custom body content */}
 </Dialog>

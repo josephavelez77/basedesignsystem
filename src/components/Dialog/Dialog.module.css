@@ -25,6 +25,8 @@
 
 /* ── Sizes ────────────────────────────────────────────────────────────────── */
 
+.fullWidth { width: 100%; }
+
 .xs { --dialog-max-width: 444px; }
 .sm { --dialog-max-width: 600px; }
 .md { --dialog-max-width: 900px; }

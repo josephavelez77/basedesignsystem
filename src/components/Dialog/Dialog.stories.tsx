@@ -109,6 +109,48 @@ export const SizeXL: Story = {
   args: { size: 'xl' },
 }
 
+// ── Full-width ────────────────────────────────────────────────────────────────
+
+export const FullWidth: Story = {
+  decorators: [withBoundedScrim],
+  args: {
+    fullWidth: true,
+    size: 'sm',
+    primaryAction: { label: 'Save' },
+    secondaryAction: { label: 'Cancel' },
+  },
+  render: (args) => (
+    <Dialog {...args} title="Edit profile" subtitle="Update your account details">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--container-gap-static-small)' }}>
+        <input
+          placeholder="Full name"
+          style={{
+            padding: '8px 12px',
+            background: 'var(--container-color-themeable-secondary)',
+            border: '1px solid var(--border-color-themeable-primary)',
+            borderRadius: 'var(--border-radius-static-primary)',
+            color: 'var(--text-color-themeable-primary)',
+            fontFamily: 'var(--text-family-static-body)',
+            fontSize: 'var(--text-size-static-body1)',
+          }}
+        />
+        <input
+          placeholder="Email address"
+          style={{
+            padding: '8px 12px',
+            background: 'var(--container-color-themeable-secondary)',
+            border: '1px solid var(--border-color-themeable-primary)',
+            borderRadius: 'var(--border-radius-static-primary)',
+            color: 'var(--text-color-themeable-primary)',
+            fontFamily: 'var(--text-family-static-body)',
+            fontSize: 'var(--text-size-static-body1)',
+          }}
+        />
+      </div>
+    </Dialog>
+  ),
+}
+
 // ── Interactive (open/close state) ────────────────────────────────────────────
 
 export const Interactive: Story = {

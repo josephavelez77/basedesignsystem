@@ -880,21 +880,30 @@ function buildHeader(version) {
 - **CSS Modules, no inline styles.** Do not pass \`style\` props with hardcoded colors or spacing — use \`className\` for layout overrides only.
 - **All imports are from the top-level package** — never from sub-paths like \`/dist/components/Button\`.
 - **Standard page layout: NavDrawer + GlobalToolbar + PageHeader.** 99.9% of pages should use this shell — NavDrawer as a full-height left column, GlobalToolbar at the top of the right column, PageHeader below it, then scrollable content that takes up 100% of the available width. See the BasicPage template for the canonical implementation.
+- **Page background is always \`--container-color-themeable-primary\`.** Every page wrapper and \`<main>\` must set \`background: var(--container-color-themeable-primary)\`. Never leave it as the browser default (white) — that will look broken in dark mode. Also set this on \`html\` and \`body\` via global CSS to prevent flash of white on load.
 
 \`\`\`tsx
 // Standard page shell — use this for virtually every page
-<div style={{ height: '100vh', display: 'flex', overflow: 'hidden' }}>
+<div style={{ height: '100vh', display: 'flex', overflow: 'hidden', background: 'var(--container-color-themeable-primary)' }}>
   <NavDrawer appName="MyApp" items={navItems} collapsed={collapsed} onCollapsedChange={setCollapsed} />
   <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
     <GlobalToolbar onMenuToggle={() => setCollapsed(c => !c)} avatarInitials="JV" />
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <PageHeader title="Page Title" />
-      <main style={{ flex: 1, padding: 'var(--container-padding-static-primary)', overflow: 'auto', width: '100%' }}>
+      <main style={{ flex: 1, padding: 'var(--container-padding-static-primary)', overflow: 'auto', width: '100%', background: 'var(--container-color-themeable-primary)' }}>
         {/* page content — use full width, let it be responsive */}
       </main>
     </div>
   </div>
 </div>
+\`\`\`
+
+\`\`\`css
+/* global.css — required in every consuming app */
+html, body {
+  margin: 0;
+  background-color: var(--container-color-themeable-primary);
+}
 \`\`\`
 
 \`\`\`tsx

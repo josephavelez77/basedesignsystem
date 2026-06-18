@@ -35,11 +35,13 @@ export interface DialogProps {
     secondaryAction?: DialogAction;
     /** Width preset: `xs` ≈ 320 px up to `xl` ≈ full-width. Defaults to `sm`. */
     size?: DialogSize;
+    /** When true, the dialog stretches to fill its `size` max-width instead of shrinking to content. Use for forms and structured content. */
+    fullWidth?: boolean;
     /** Additional CSS class applied to the dialog panel for layout overrides. */
     className?: string;
 }
 export declare const Dialog: {
-    ({ open, onClose, title, subtitle, dismissible, content, children, primaryAction, secondaryAction, size, className, }: DialogProps): import("react/jsx-runtime").JSX.Element | null;
+    ({ open, onClose, title, subtitle, dismissible, content, children, primaryAction, secondaryAction, size, fullWidth, className, }: DialogProps): import("react/jsx-runtime").JSX.Element | null;
     displayName: string;
 };
 //# sourceMappingURL=Dialog.d.ts.map
