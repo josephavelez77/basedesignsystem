@@ -51,11 +51,10 @@
 
 .subtitle {
   margin: 0;
-  font-family: var(--text-family-static-headline);
-  font-size: var(--text-size-static-headline3);
+  font-family: var(--text-family-static-body);
+  font-size: var(--text-size-static-body1);
   font-weight: var(--text-weight-static-regular);
-  line-height: var(--text-line-static-headline3);
-  letter-spacing: var(--text-letter-static-primary);
+  line-height: var(--text-line-static-body1);
   color: var(--text-color-themeable-secondary);
   white-space: nowrap;
 }
