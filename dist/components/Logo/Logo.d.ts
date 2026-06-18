@@ -1,15 +1,12 @@
-export type LogoOrientation = 'horizontal' | 'vertical';
-export type LogoSize = 'small' | 'large';
+export type LogoVariant = 'horizontal' | 'vertical' | 'icon';
 export interface LogoProps {
-    /** `horizontal` places the mark and wordmark side by side; `vertical` stacks them. */
-    orientation?: LogoOrientation;
-    /** `large` is the standard size; `small` is a compact variant for toolbars. */
-    size?: LogoSize;
-    /** Additional CSS class applied to the root element for layout overrides. */
+    /** Which form to render: icon mark only, horizontal (mark + wordmark side by side), or vertical (stacked). */
+    variant?: LogoVariant;
+    /** Additional CSS class for size or position overrides. */
     className?: string;
 }
 export declare const Logo: {
-    ({ orientation, size, className, }: LogoProps): import("react/jsx-runtime").JSX.Element;
+    ({ variant, className }: LogoProps): import("react/jsx-runtime").JSX.Element;
     displayName: string;
 };
 //# sourceMappingURL=Logo.d.ts.map

@@ -24,15 +24,17 @@ export interface NavDrawerProps {
     appName: string;
     /** Navigation item definitions rendered in the drawer's primary nav list. */
     items: NavItemConfig[];
-    /** Initial collapsed state for uncontrolled usage. When collapsed, labels are hidden and items show tooltips. */
+    /** Controlled collapsed state. When provided, the drawer is fully controlled — pair with `onCollapsedChange`. */
+    collapsed?: boolean;
+    /** Initial collapsed state for uncontrolled usage. Ignored when `collapsed` is provided. */
     defaultCollapsed?: boolean;
-    /** Called with the new collapsed state whenever the user toggles the drawer open/closed. */
+    /** Called with the new collapsed state whenever the collapse state changes. */
     onCollapsedChange?: (collapsed: boolean) => void;
     /** Additional CSS class applied to the root `<nav>` element for layout overrides. */
     className?: string;
 }
 export declare const NavDrawer: {
-    ({ appName, items, defaultCollapsed, onCollapsedChange, className, }: NavDrawerProps): import("react/jsx-runtime").JSX.Element;
+    ({ appName, items, collapsed: collapsedProp, defaultCollapsed, onCollapsedChange, className, }: NavDrawerProps): import("react/jsx-runtime").JSX.Element;
     displayName: string;
 };
 //# sourceMappingURL=NavDrawer.d.ts.map
