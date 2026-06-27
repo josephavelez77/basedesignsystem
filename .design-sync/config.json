@@ -1,0 +1,57 @@
+{
+  "projectId": "d8afad88-f447-4525-b04f-dde1eb894933",
+  "pkg": "@josephavelez77/charter-design-system",
+  "shape": "storybook",
+  "storybookStatic": ".design-sync/sb-reference",
+  "buildCmd": "npm run build",
+  "cssEntry": "./dist/tokens/index.css",
+  "extraEntries": [
+    "@fortawesome/react-fontawesome",
+    "@fortawesome/fontawesome-svg-core",
+    "@fortawesome/free-solid-svg-icons",
+    "@fortawesome/free-regular-svg-icons"
+  ],
+  "storyImports": {
+    "bundle": [
+      "@fortawesome/free-solid-svg-icons",
+      "@fortawesome/free-regular-svg-icons"
+    ]
+  },
+  "titleMap": {
+    "Foundations/Borders": null,
+    "Foundations/Color Tokens": null,
+    "Foundations/Shadow": null,
+    "Foundations/Sizing": null,
+    "Foundations/Spacing": null,
+    "Foundations/Typography": null,
+    "Templates": null
+  },
+  "overrides": {
+    "Button": { "cardMode": "column" },
+    "Card": { "cardMode": "column" },
+    "ChartCard": { "cardMode": "column" },
+    "DataGrid": { "cardMode": "column" },
+    "Table": { "cardMode": "column" },
+    "ProgressBar": { "cardMode": "column" },
+    "Toast": { "cardMode": "column" },
+    "DateField": { "cardMode": "column" },
+    "FileUploader": { "cardMode": "column" },
+    "FileUploaderListItem": { "cardMode": "column" },
+    "NumberField": { "cardMode": "column" },
+    "PasswordField": { "cardMode": "column" },
+    "SelectField": { "cardMode": "column" },
+    "TextArea": { "cardMode": "column" },
+    "TextField": { "cardMode": "column" },
+    "NavDrawer": { "cardMode": "single", "primaryStory": "Default" },
+    "Dialog": { "cardMode": "single", "primaryStory": "Default" },
+    "Drawer": { "cardMode": "single", "primaryStory": "Default" },
+    "ButtonGroup": { "cardMode": "column" },
+    "StatusChip": { "cardMode": "column" },
+    "KpiCard": { "cardMode": "column" },
+    "ListGroup": { "cardMode": "column" },
+    "ListItem": { "cardMode": "column" },
+    "Pagination": { "cardMode": "column" },
+    "GlobalToolbar": { "cardMode": "column" },
+    "Stepper": { "cardMode": "column" }
+  }
+}
