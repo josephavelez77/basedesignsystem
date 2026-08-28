@@ -15,7 +15,14 @@
 - `cssEntry` and `extraEntries` are stable as long as `vite.config.ts` keeps `cssCodeSplit: false` — if that changes, component CSS may move into separate files.
 - FA versions: extraEntries bundles the devDep versions; if peerDep version ranges diverge from devDeps, icons may behave differently in consumers.
 - Google Fonts are loaded via `@import url(...)` in `styles.css` — designs require network access to fonts.googleapis.com. If previews ever render with fallback fonts, check egress.
-- `[RENDER_THIN]` components (Logo, Icon, IconButton, RadioButton) were NOT fixed via owned previews — they render SVG/CSS visual content with no text. All graded `match` by image comparison. These will flag on every sync; consider owned previews if this becomes a problem.
+- `[RENDER_THIN]` components (Logo, Icon, IconButton, RadioButton) were NOT fixed via owned previews — they render SVG/CSS visual content with no text. All graded `match` by image comparison. These flag `[RENDER_THIN]` on every sync — expected, not a regression. Consider owned previews only if this becomes a problem.
+- `readmeHeader` → `.design-sync/conventions.md` (added 2026-08-28). Hand-authored, human-editable. On each re-sync, re-validate the token/prop/component names it enumerates against the fresh build (grep `_ds_bundle.css` `:root` block + `components/<group>/<Name>/` dirs); never rewrite it.
+- Stale remote file `_preview/PopOver.js` (wrong casing, alongside the correct `_preview/Popover.js`) has been in the project since an earlier sync. The anchor diff doesn't flag it, so the atomic-path upload can't clean it (deletes come verbatim from `.sync-diff.json`, which lists none). Harmless. To remove: a future sync would need it added to the plan's `deletes` manually.
 
 ## Build notes for re-sync
-- This is a source repo — the package is NOT installed under its own `node_modules`. `resync.mjs` fails with [NO_DIST] in this context (it tries `node_modules/@josephavelez77/charter-design-system`). Use `package-build.mjs --entry ./dist/index.cjs` instead: first run `npm run build`, then `node .ds-sync/package-build.mjs --config .design-sync/config.json --entry ./dist/index.cjs --node-modules ./node_modules --out ./ds-bundle --storybook-static .design-sync/sb-reference`.
+- `resync.mjs` now accepts `--entry`, so the driver works in this source repo (where `node_modules/@josephavelez77/charter-design-system` does not exist). The old `[NO_DIST]` workaround is obsolete. Run from repo root:
+  1. `npm run build`
+  2. `npx storybook build -c .storybook -o "$(git rev-parse --show-toplevel)/.design-sync/sb-reference"` (rebuild whenever DS source changed)
+  3. Fetch `_ds_sync.json` from the project → `.design-sync/.cache/remote-sync.json`
+  4. `node .ds-sync/resync.mjs --config .design-sync/config.json --node-modules ./node_modules --entry ./dist/index.cjs --out ./ds-bundle --remote .design-sync/.cache/remote-sync.json`
+- `--node-modules ./node_modules` = repo root (React lives there; the DS package has no own node_modules).

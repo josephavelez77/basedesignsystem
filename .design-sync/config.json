@@ -2,6 +2,7 @@
   "projectId": "d8afad88-f447-4525-b04f-dde1eb894933",
   "pkg": "@josephavelez77/charter-design-system",
   "shape": "storybook",
+  "readmeHeader": ".design-sync/conventions.md",
   "storybookStatic": ".design-sync/sb-reference",
   "buildCmd": "npm run build",
   "cssEntry": "./dist/tokens/index.css",
