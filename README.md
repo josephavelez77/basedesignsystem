@@ -126,7 +126,7 @@ export function App() {
 | `IconButton` | Icon-only button |
 | `KpiCard` | Key performance indicator card |
 | `ListCard` / `ListGroup` / `ListItem` | List layout primitives |
-| `Logo` | Brand logo with orientation and size variants |
+| `Logo` | Brand logo — `horizontal` (mark + wordmark) or `icon` only |
 | `Menu` / `MenuItem` | Dropdown context menu |
 | `MultiSelectField` | Multi-value select input |
 | `NavDrawer` | Sidebar navigation drawer |

@@ -175,9 +175,9 @@
 /* ── Logo size override (horizontal only) ────────────────────────────────── */
 
 .drawerLogo {
-  /* scale the 196×57 horizontal SVG down ~18% to fit the 240px drawer comfortably */
-  width: 160px;
-  height: 47px;
+  /* scale the 238×64 horizontal SVG down to fit the 240px drawer comfortably */
+  width: 149px;
+  height: 40px;
 }
 
 /* ── Collapsed: icon-only nav items ──────────────────────────────────────── */

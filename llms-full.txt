@@ -1,6 +1,6 @@
 # @josephavelez77/charter-design-system — Full Component Reference
 
-> Version: 0.0.6
+> Version: 0.0.7
 > Package: `npm install @josephavelez77/charter-design-system`
 > Repository: https://github.com/josephavelez77/charterdesignsystem
 
@@ -387,7 +387,7 @@ Compact row combining an Avatar and a name/role text block. Used in tables, list
 ---
 ## Logo
 
-Application logo mark. Renders the brand SVG at the configured size.
+Brand logo as an inline SVG. Monochrome, themeable via text-color tokens. `variant="horizontal"` renders the mark plus "Charter" wordmark and tagline; `variant="icon"` renders the mark only. Size via `className`, `width`/`height`, or `style`.
 
 **Import:** `import { Logo } from '@josephavelez77/charter-design-system'`
 
@@ -395,13 +395,14 @@ Application logo mark. Renders the brand SVG at the configured size.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `LogoVariant` | — | Which form to render: icon mark only, horizontal (mark + wordmark side by side), or vertical (stacked). |
+| `variant` | `LogoVariant` | — | Which form to render: `icon` mark only, or `horizontal` (mark + wordmark + tagline side by side). |
 | `className` | `string` | — | Additional CSS class for size or position overrides. |
 
 ### Usage
 
 ```tsx
-<Logo size="default" />
+<Logo variant="horizontal" />
+<Logo variant="icon" className={styles.smallLogo} />
 ```
 
 ---

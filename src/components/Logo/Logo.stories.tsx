@@ -8,7 +8,7 @@ const meta: Meta<typeof Logo> = {
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
   argTypes: {
-    variant: { control: 'select', options: ['horizontal', 'vertical', 'icon'] },
+    variant: { control: 'select', options: ['horizontal', 'icon'] },
   },
 }
 
@@ -19,10 +19,6 @@ export const Horizontal: Story = {
   args: { variant: 'horizontal' },
 }
 
-export const Vertical: Story = {
-  args: { variant: 'vertical' },
-}
-
 export const Icon: Story = {
   args: { variant: 'icon' },
 }
@@ -31,7 +27,6 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
       <Logo variant="horizontal" />
-      <Logo variant="vertical" />
       <Logo variant="icon" />
     </div>
   ),

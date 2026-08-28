@@ -162,9 +162,10 @@ const COMPONENTS = [
   {
     exports: ['Logo'],
     category: 'Display',
-    description: 'Application logo mark. Renders the brand SVG at the configured size.',
+    description: 'Brand logo as an inline SVG. Monochrome, themeable via text-color tokens. `variant="horizontal"` renders the mark plus "Charter" wordmark and tagline; `variant="icon"` renders the mark only. Size via `className`, `width`/`height`, or `style`.',
     files: ['Logo/Logo.tsx'],
-    example: `<Logo size="default" />`,
+    example: `<Logo variant="horizontal" />
+<Logo variant="icon" className={styles.smallLogo} />`,
   },
 
   // ── Feedback ─────────────────────────────────────────────────────────────────
