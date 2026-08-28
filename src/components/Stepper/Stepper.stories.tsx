@@ -20,16 +20,56 @@ const fiveSteps = [
   { label: 'Step label' },
 ]
 
+/** Stepper docks below the main content; this frame mimics that page layout. */
+const BelowContent = ({ children }: { children: React.ReactNode }) => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '320px',
+      background: 'var(--container-color-themeable-primary)',
+    }}
+  >
+    <div
+      style={{
+        flex: 1,
+        padding: '24px',
+        color: 'var(--text-color-themeable-secondary)',
+        fontFamily: 'var(--text-family-static-body)',
+        fontSize: 'var(--text-size-static-body1)',
+      }}
+    >
+      Main content area
+    </div>
+    {children}
+  </div>
+)
+
 export const FirstStep: Story = {
   args: { steps: fiveSteps, activeStep: 0 },
+  render: (args) => (
+    <BelowContent>
+      <Stepper {...args} />
+    </BelowContent>
+  ),
 }
 
 export const MiddleStep: Story = {
   args: { steps: fiveSteps, activeStep: 2 },
+  render: (args) => (
+    <BelowContent>
+      <Stepper {...args} />
+    </BelowContent>
+  ),
 }
 
 export const LastStep: Story = {
   args: { steps: fiveSteps, activeStep: 4 },
+  render: (args) => (
+    <BelowContent>
+      <Stepper {...args} />
+    </BelowContent>
+  ),
 }
 
 export const TwoSteps: Story = {
@@ -37,6 +77,11 @@ export const TwoSteps: Story = {
     steps: [{ label: 'Details' }, { label: 'Review' }],
     activeStep: 0,
   },
+  render: (args) => (
+    <BelowContent>
+      <Stepper {...args} />
+    </BelowContent>
+  ),
 }
 
 export const ThreeSteps: Story = {
@@ -44,6 +89,11 @@ export const ThreeSteps: Story = {
     steps: [{ label: 'Details' }, { label: 'Configure' }, { label: 'Review' }],
     activeStep: 1,
   },
+  render: (args) => (
+    <BelowContent>
+      <Stepper {...args} />
+    </BelowContent>
+  ),
 }
 
 // ── Interactive ───────────────────────────────────────────────────────────────
@@ -65,7 +115,25 @@ export const Interactive: Story = {
     ]
 
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '320px',
+          background: 'var(--container-color-themeable-primary)',
+        }}
+      >
+        <div
+          style={{
+            flex: 1,
+            padding: '24px',
+            color: 'var(--text-color-themeable-primary)',
+            fontFamily: 'var(--text-family-static-body)',
+            fontSize: 'var(--text-size-static-body1)',
+          }}
+        >
+          {content[step]}
+        </div>
         <Stepper
           steps={steps}
           activeStep={step}
@@ -74,9 +142,6 @@ export const Interactive: Story = {
           onCancel={() => setStep(0)}
           onDone={() => setStep(0)}
         />
-        <div style={{ padding: '24px', color: 'var(--text-color-themeable-primary)', fontFamily: 'var(--text-family-static-body)', fontSize: 'var(--text-size-static-body1)' }}>
-          {content[step]}
-        </div>
       </div>
     )
   },

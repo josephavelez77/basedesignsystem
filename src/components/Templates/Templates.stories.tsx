@@ -173,6 +173,12 @@ export const StepperPage: Story = {
         <div style={rightPane}>
           <GlobalToolbar onMenuToggle={() => setCollapsed((c) => !c)} />
           <div style={main}>
+            <PageHeader
+              title="Page title"
+              primaryAction={{ label: 'Primary' }}
+              secondaryAction={{ label: 'Secondary' }}
+            />
+            <div style={content} />
             <Stepper
               steps={STEPPER_STEPS}
               activeStep={activeStep}
@@ -181,7 +187,6 @@ export const StepperPage: Story = {
               onCancel={() => setActiveStep(0)}
               onDone={() => setActiveStep(0)}
             />
-            <div style={content} />
           </div>
         </div>
       </div>

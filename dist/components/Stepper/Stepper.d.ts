@@ -1,19 +1,19 @@
 export interface StepItem {
-    /** Display label shown beneath the step badge. */
+    /** Display label — only rendered for the active step; hidden on complete and upcoming steps. */
     label: string;
 }
 export interface StepperProps {
-    /** Ordered list of step definitions; each requires a `label`. */
+    /** Ordered list of step definitions; each requires a `label`. Designed for up to 5 steps. */
     steps: StepItem[];
-    /** 0-indexed index of the currently active step; steps before it are shown as complete. */
+    /** 0-indexed index of the currently active step; earlier steps render as complete, later as upcoming. */
     activeStep: number;
-    /** Called when the user clicks the Next button (not on the last step). */
+    /** Called when the user clicks the Next button (all steps except the last). */
     onNext?: () => void;
-    /** Called when the user clicks the Back button (not on the first step). */
+    /** Called when the user clicks the Back button (all steps except the first). */
     onBack?: () => void;
     /** Called when the user clicks the Cancel button. */
     onCancel?: () => void;
-    /** Called when the user clicks the Done button (on the last step). */
+    /** Called when the user clicks the confirmatory button shown on the last step. */
     onDone?: () => void;
     /** Label for the cancel button. Defaults to `"Cancel"`. */
     cancelLabel?: string;
@@ -21,7 +21,7 @@ export interface StepperProps {
     backLabel?: string;
     /** Label for the next button (all steps except last). Defaults to `"Next"`. */
     nextLabel?: string;
-    /** Label for the done button (last step). Defaults to `"Done"`. */
+    /** Label for the confirmatory button on the last step. Defaults to `"Submit"`. */
     doneLabel?: string;
     /** Additional CSS class applied to the root element for layout overrides. */
     className?: string;

@@ -5,22 +5,22 @@ import { Button } from '../Button/Button'
 import styles from './Stepper.module.css'
 
 export interface StepItem {
-  /** Display label shown beneath the step badge. */
+  /** Display label — only rendered for the active step; hidden on complete and upcoming steps. */
   label: string
 }
 
 export interface StepperProps {
-  /** Ordered list of step definitions; each requires a `label`. */
+  /** Ordered list of step definitions; each requires a `label`. Designed for up to 5 steps. */
   steps: StepItem[]
-  /** 0-indexed index of the currently active step; steps before it are shown as complete. */
+  /** 0-indexed index of the currently active step; earlier steps render as complete, later as upcoming. */
   activeStep: number
-  /** Called when the user clicks the Next button (not on the last step). */
+  /** Called when the user clicks the Next button (all steps except the last). */
   onNext?: () => void
-  /** Called when the user clicks the Back button (not on the first step). */
+  /** Called when the user clicks the Back button (all steps except the first). */
   onBack?: () => void
   /** Called when the user clicks the Cancel button. */
   onCancel?: () => void
-  /** Called when the user clicks the Done button (on the last step). */
+  /** Called when the user clicks the confirmatory button shown on the last step. */
   onDone?: () => void
   /** Label for the cancel button. Defaults to `"Cancel"`. */
   cancelLabel?: string
@@ -28,7 +28,7 @@ export interface StepperProps {
   backLabel?: string
   /** Label for the next button (all steps except last). Defaults to `"Next"`. */
   nextLabel?: string
-  /** Label for the done button (last step). Defaults to `"Done"`. */
+  /** Label for the confirmatory button on the last step. Defaults to `"Submit"`. */
   doneLabel?: string
   /** Additional CSS class applied to the root element for layout overrides. */
   className?: string
@@ -39,10 +39,11 @@ type StepState = 'active' | 'upcoming' | 'complete'
 function StepBadge({ state, number }: { state: StepState; number: number }) {
   return (
     <div className={[styles.badge, styles[`badge_${state}`]].join(' ')}>
-      {state === 'complete'
-        ? <Icon icon={faCheck} size="small" />
-        : <span className={styles.badgeNumber}>{number}</span>
-      }
+      {state === 'complete' ? (
+        <Icon icon={faCheck} size="small" aria-label="Completed" />
+      ) : (
+        <span className={styles.badgeNumber}>{number}</span>
+      )}
     </div>
   )
 }
@@ -57,7 +58,7 @@ export const Stepper = ({
   cancelLabel = 'Cancel',
   backLabel = 'Back',
   nextLabel = 'Next',
-  doneLabel = 'Done',
+  doneLabel = 'Submit',
   className,
 }: StepperProps) => {
   const isFirst = activeStep === 0
@@ -65,36 +66,35 @@ export const Stepper = ({
 
   return (
     <div className={[styles.stepper, className ?? ''].filter(Boolean).join(' ')}>
-      {/* Steps row */}
-      <div className={styles.stepsRow}>
+      {/* Step badges — single row, current step also shows its label */}
+      <div className={styles.steps}>
         {steps.map((step, i) => {
-          const state: StepState = i < activeStep ? 'complete' : i === activeStep ? 'active' : 'upcoming'
+          const state: StepState =
+            i < activeStep ? 'complete' : i === activeStep ? 'active' : 'upcoming'
           return (
             <React.Fragment key={i}>
-              {i > 0 && <div className={[styles.divider, i <= activeStep ? styles.dividerComplete : ''].filter(Boolean).join(' ')} />}
-              <div className={styles.stepItem}>
+              {i > 0 && <div className={styles.divider} />}
+              <div className={styles.step}>
                 <StepBadge state={state} number={i + 1} />
-                <span className={[styles.stepLabel, styles[`label_${state}`]].join(' ')}>
-                  {step.label}
-                </span>
+                {state === 'active' && (
+                  <span className={styles.stepLabel}>{step.label}</span>
+                )}
               </div>
             </React.Fragment>
           )
         })}
       </div>
 
-      {/* Controls row */}
+      {/* Trailing actions — Cancel / Back / Next|Submit */}
       <div className={styles.controls}>
-        <div className={styles.leftControls}>
-          <Button variant="neutral" emphasis="tertiary" onClick={onCancel}>
-            {cancelLabel}
+        <Button variant="neutral" emphasis="tertiary" onClick={onCancel}>
+          {cancelLabel}
+        </Button>
+        {!isFirst && (
+          <Button variant="neutral" emphasis="secondary" onClick={onBack}>
+            {backLabel}
           </Button>
-          {!isFirst && (
-            <Button variant="neutral" emphasis="secondary" onClick={onBack}>
-              {backLabel}
-            </Button>
-          )}
-        </div>
+        )}
         <Button variant="brandPrimary" emphasis="primary" onClick={isLast ? onDone : onNext}>
           {isLast ? doneLabel : nextLabel}
         </Button>
